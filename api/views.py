@@ -11,6 +11,11 @@ logging.basicConfig(filename='./logs/api.log', level=logging.INFO, format='%(asc
 
 @api_blueprint.route('/api/posts/', methods=['GET'])
 def get_all_posts():
+    """
+    This function is used to get all the posts from the database.
+    Returns:
+        A JSON response with the list of posts
+    """
     logging.info(f'{datetime.datetime.now()} [INFO] запрос /api/posts/')
     res = posts.load_posts_json()
     return jsonify(res)
@@ -18,5 +23,10 @@ def get_all_posts():
 
 @api_blueprint.route('/api/posts/<int:postid>', methods=['GET'])
 def get_post_by_id(postid):
+    """
+    This function is used to get a single post by its id from the database.
+    :param postid: The id of the post to retrieve
+    :return: A JSON response with the requested post
+    """
     logging.info(f'{datetime.datetime.now()} [INFO] запрос /api/posts/{postid}')
     return jsonify(posts.load_posts_pk(postid))
